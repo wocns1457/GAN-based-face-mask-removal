@@ -76,13 +76,13 @@ class Dataset():
 
     def load_image_train(self, image_file):
         real_image, mask_image, binary_image = self.train_image(image_file)
-        real_image, mask_image, binary_image = self.train_resize_and_normalize(real_image, mask_image, binary_image, 256, 256)
+        real_image, mask_image, binary_image = self.train_resize_and_normalize(real_image, mask_image, binary_image, 128, 128)
         
         return real_image, mask_image, binary_image
 
     def load_image_test(self, image_file):
         input_image = self.test_image(image_file)
-        input_image = self.test_resize_and_normalize(input_image, 256, 256)
+        input_image = self.test_resize_and_normalize(input_image, 128, 128)
 
         return input_image  
 
