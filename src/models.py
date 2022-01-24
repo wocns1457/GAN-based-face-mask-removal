@@ -173,14 +173,6 @@ class Face_D(tf.keras.Model):
     x = self.bn4(x, training=training)
     x = tf.nn.leaky_relu(x)
     x = self.zero_pad2(x)
-    x = self.conv2_5(x)
+    out = self.conv2_5(x)
 
-    return x
-  
-
-# mask_G = Mask_G()
-# face_G = Face_G()
-# face_D = Face_D()
-# mask_G.build(input_shape=(None, 256, 256, 3))
-# face_G.build(input_shape=(None, 256, 256, 3))
-# face_D.build(input_shape=[(None, 256, 256, 3), (None, 256, 256, 3)])
+    return out
