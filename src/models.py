@@ -1,5 +1,6 @@
 import tensorflow as tf
 from tensorflow.keras import layers
+from layer import BatchInstanceNormalization
 
 class Mask_G(tf.keras.Model):
   def __init__(self, filters=64, kernel_size=3, strides=2, padding='same'):
@@ -12,13 +13,13 @@ class Mask_G(tf.keras.Model):
 
     self.conv2_1 = layers.Conv2D(filters, kernel_size=self.kernel_size, strides=self.strides, padding=self.padding, kernel_initializer=initializer, use_bias=False)
     self.conv2_2 = layers.Conv2D(filters*2, kernel_size=self.kernel_size, strides=self.strides, padding=self.padding, kernel_initializer=initializer, use_bias=False)
-    self.bn2 = layers.BatchNormalization()
+    self.bn2 = BatchInstanceNormalization()
     self.conv2_3 = layers.Conv2D(filters*4, kernel_size=self.kernel_size, strides=self.strides, padding=self.padding, kernel_initializer=initializer, use_bias=False)
-    self.bn3 = layers.BatchNormalization()
+    self.bn3 = BatchInstanceNormalization()
     self.conv2_4 = layers.Conv2D(filters*8, kernel_size=self.kernel_size, strides=self.strides, padding=self.padding, kernel_initializer=initializer, use_bias=False)
-    self.bn4 = layers.BatchNormalization()
+    self.bn4 = BatchInstanceNormalization()
     self.conv2_5 = layers.Conv2D(filters*8, kernel_size=self.kernel_size, strides=self.strides, padding=self.padding, kernel_initializer=initializer, use_bias=False)
-    self.bn5 = layers.BatchNormalization()
+    self.bn5 = BatchInstanceNormalization()
     
     self.convt2_5 = layers.Conv2DTranspose(filters*8, kernel_size=self.kernel_size, strides=self.strides, padding=self.padding, kernel_initializer=initializer, use_bias=False)
     self.convt2_4 = layers.Conv2DTranspose(filters*4, kernel_size=self.kernel_size, strides=self.strides, padding=self.padding, kernel_initializer=initializer, use_bias=False)
@@ -45,16 +46,16 @@ class Mask_G(tf.keras.Model):
     
     # decoder
     dec_5 = self.convt2_5(enc_5)
-    dec_5 = tf.nn.relu(dec_5)
+    dec_5 = tf.nn.leaky_relu(dec_5)
     cat4 = layers.Concatenate()([dec_5, enc_4])
     dec_4 = self.convt2_4(cat4)
-    dec_4 = tf.nn.relu(dec_4)
+    dec_4 = tf.nn.leaky_relu(dec_4)
     cat3 = layers.Concatenate()([dec_4, enc_3])
     dec_3 = self.convt2_3(cat3)
-    dec_3 = tf.nn.relu(dec_3)
+    dec_3 = tf.nn.leaky_relu(dec_3)
     cat2 = layers.Concatenate()([dec_3, enc_2])
     dec_2 = self.convt2_2(cat2)
-    dec_2 = tf.nn.relu(dec_2)
+    dec_2 = tf.nn.leaky_relu(dec_2)
     cat1 = layers.Concatenate()([dec_2, enc_1])
     
     out = self.convt2_1(cat1)
@@ -72,15 +73,15 @@ class Face_G(tf.keras.Model):
 
     self.conv2_1 = layers.Conv2D(filters, kernel_size=self.kernel_size, strides=self.strides, padding=self.padding, kernel_initializer=initializer, use_bias=False)
     self.conv2_2 = layers.Conv2D(filters*2, kernel_size=self.kernel_size, strides=self.strides, padding=self.padding, kernel_initializer=initializer, use_bias=False)
-    self.bn2 = layers.BatchNormalization()
+    self.bn2 = BatchInstanceNormalization()
     self.conv2_3 = layers.Conv2D(filters*4, kernel_size=self.kernel_size, strides=self.strides, padding=self.padding, kernel_initializer=initializer, use_bias=False)
-    self.bn3 = layers.BatchNormalization()
+    self.bn3 = BatchInstanceNormalization()
     self.conv2_4 = layers.Conv2D(filters*8, kernel_size=self.kernel_size, strides=self.strides, padding=self.padding, kernel_initializer=initializer, use_bias=False)
-    self.bn4 = layers.BatchNormalization()
+    self.bn4 = BatchInstanceNormalization()
     self.conv2_5 = layers.Conv2D(filters*8, kernel_size=self.kernel_size, strides=self.strides, padding=self.padding, kernel_initializer=initializer, use_bias=False)
-    self.bn5 = layers.BatchNormalization()
+    self.bn5 = BatchInstanceNormalization()
     self.conv2_6 = layers.Conv2D(filters*8, kernel_size=self.kernel_size, strides=self.strides, padding=self.padding, kernel_initializer=initializer, use_bias=False)
-    self.bn6 = layers.BatchNormalization()
+    self.bn6 = BatchInstanceNormalization()
     
     self.convt2_6 = layers.Conv2DTranspose(filters*8, kernel_size=self.kernel_size, strides=self.strides, padding=self.padding, kernel_initializer=initializer, use_bias=False)
     self.drop2_6 = layers.Dropout(0.5)
@@ -113,21 +114,21 @@ class Face_G(tf.keras.Model):
 
     #decoder
     dec_6 = self.convt2_6(enc_6)
-    dec_6 = tf.nn.relu(dec_6)
+    dec_6 = tf.nn.leaky_relu(dec_6)
     dec_6 = self.drop2_6(dec_6, training=training)
     cat5 = layers.Concatenate()([dec_6, enc_5])
     dec_5 = self.convt2_5(cat5)
-    dec_5 = tf.nn.relu(dec_5)
+    dec_5 = tf.nn.leaky_relu(dec_5)
     dec_5 = self.drop2_5(dec_5, training=training)
     cat4 = layers.Concatenate()([dec_5, enc_4])
     dec_4 = self.convt2_4(cat4)
-    dec_4 = tf.nn.relu(dec_4)
+    dec_4 = tf.nn.leaky_relu(dec_4)
     cat3 = layers.Concatenate()([dec_4, enc_3])
     dec_3 = self.convt2_3(cat3)
-    dec_3 = tf.nn.relu(dec_3)
+    dec_3 = tf.nn.leaky_relu(dec_3)
     cat2 = layers.Concatenate()([dec_3, enc_2])
     dec_2 = self.convt2_2(cat2)
-    dec_2 = tf.nn.relu(dec_2)
+    dec_2 = tf.nn.leaky_relu(dec_2)
     cat1 = layers.Concatenate()([dec_2, enc_1])
     
     out = self.convt2_1(cat1)
@@ -147,12 +148,12 @@ class Face_D(tf.keras.Model):
 
     self.conv2_1 = layers.Conv2D(filters, kernel_size=self.kernel_size, strides=self.strides, padding=self.padding, kernel_initializer=initializer, use_bias=False)
     self.conv2_2 = layers.Conv2D(filters*2, kernel_size=self.kernel_size, strides=self.strides, padding=self.padding, kernel_initializer=initializer, use_bias=False)
-    self.bn2 = layers.BatchNormalization()
+    self.bn2 = BatchInstanceNormalization()
     self.conv2_3 = layers.Conv2D(filters*4, kernel_size=self.kernel_size, strides=self.strides, padding=self.padding, kernel_initializer=initializer, use_bias=False)
-    self.bn3 = layers.BatchNormalization()
+    self.bn3 = BatchInstanceNormalization()
     self.zero_pad1 = layers.ZeroPadding2D()
     self.conv2_4 = layers.Conv2D(filters*8, kernel_size=self.kernel_size, strides=1, kernel_initializer=initializer, use_bias=False)
-    self.bn4 = layers.BatchNormalization()
+    self.bn4 = BatchInstanceNormalization()
     self.zero_pad2 = layers.ZeroPadding2D()
     self.conv2_5 = layers.Conv2D(1, kernel_size=self.kernel_size, strides=1, kernel_initializer=initializer, use_bias=False)
 
