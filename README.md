@@ -10,7 +10,7 @@
 - matplotlib==3.5.1
 
 ## DataSet
-학습에 사용된 이미지는 약 30000장 정도 사용했습니다.
+학습에 사용된 이미지는 약 30,000장 정도 사용되었습니다.
 - CelebA dataset: http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
 
 ## Data Preprocessing
@@ -21,14 +21,14 @@
   Face Landmark는 얼굴의 특징점을 말합니다. 예를 들어 동공의 위치, 입술의 좌표, 눈썹의 좌표 등 이런 값들을 추출하여 x, y 값으로 리턴을 하는데 대표적으로 Python의 라이브러리 중 dlib, opencv로 랜드마크를 추출합니다.  
 [Face Landmark Reference](https://www.pyimagesearch.com/2017/04/03/facial-landmarks-dlib-opencv-python/)
 <!-- ![Face landmark](sample_img/face_landmark.JPG)-->
-<img src = "https://github.com/wocns1457/GAN-based-face-mask-removal/blob/main/sample_img/face_landmark.JPG" width="50%" height="50%">
+<img src = "https://github.com/wocns1457/GAN-based-face-mask-removal/blob/main/sample_img/face_landmark.JPG" width="65%" height="65%">
 
 - 특징점을 기준으로 마스크 합성
-<img src = "https://github.com/wocns1457/GAN-based-face-mask-removal/blob/main/sample_img/processing.JPG" width="50%" height="50%">  
+<img src = "https://github.com/wocns1457/GAN-based-face-mask-removal/blob/main/sample_img/processing.JPG" width="65%" height="65%">  
 
 ## Model Architecture
 <p align="center">
-<img src = "https://github.com/wocns1457/GAN-based-face-mask-removal/blob/main/sample_img/model.JPG" width="60%" height="60%">
+<img src = "https://github.com/wocns1457/GAN-based-face-mask-removal/blob/main/sample_img/model.JPG" width="70%" height="70%">
 </p>
 
 - Training Details  
@@ -62,12 +62,12 @@
 
 - epoch의 변화에 따른 출력 결과
 <p align="center">
-<img src = "https://github.com/wocns1457/GAN-based-face-mask-removal/blob/main/sample_img/result1.JPG" width="45%" height="45%">
+<img src = "https://github.com/wocns1457/GAN-based-face-mask-removal/blob/main/sample_img/result1.JPG" width="55%" height="55%">
 </p>  
 
 - 학습을 끝낸 후 출력 결과
 <p align="center">
-<img src = "https://github.com/wocns1457/GAN-based-face-mask-removal/blob/main/sample_img/result2.JPG" width="25%" height="15%">
+<img src = "https://github.com/wocns1457/GAN-based-face-mask-removal/blob/main/sample_img/result2.JPG" width="40%" height="25%">
 </p>  
 
 ## Reference
