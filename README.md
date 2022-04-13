@@ -60,7 +60,13 @@
  ```
  
 ## Result
-
+ - Performance evaluation  
+ CelebA 데이터중 10,000장의 이미지를 Test data로 사용하였고, 실제 이미지와 생성된 이미지 간의 특징 거리 측정에 가장 널리 사용되는  
+ 평가 지표인 FID(Frechet Inception Distance)를 사용하였습니다.  
+ 
+    >***FID score : 22.863***  
+<br>
+    
 - epoch의 변화에 따른 출력 결과
 <p align="center">
 <img src = "https://github.com/wocns1457/GAN-based-face-mask-removal/blob/main/sample_img/result1.JPG" width="55%" height="55%">
@@ -75,5 +81,6 @@
 - NIZAM UD DIN, KAMRAN JAVED , SEHO BAE, AND JUNEHO YI "A Novel GAN-Based Network for Unmasking of Masked Face"  
   (pull paper : https://ieeexplore.ieee.org/document/9019697)
 - Instance Normalization code : https://github.com/bigbreadguy/Batch_Instance_Normalization-Tensorflow2.0
-- python opencv, dlib face landmark https://www.pyimagesearch.com/2017/04/03/facial-landmarks-dlib-opencv-python
+- python opencv, dlib face landmark : https://www.pyimagesearch.com/2017/04/03/facial-landmarks-dlib-opencv-python  
+- FID score for PyTorch : https://github.com/mseitzer/pytorch-fid
 
