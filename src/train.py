@@ -45,8 +45,11 @@ class Train_Mask:
             os.mkdir(checkpoint_dir)
         self.checkpoint.save(file_prefix= self.checkpoint_prefix)
 
-    def load(self, checkpoint_dir):
-        self.checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
+    def load(self, checkpoint_dir, ckpt_num=None):
+        if ckpt_num is None:
+            self.face_checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
+        else:
+            self.face_checkpoint.restore(checkpoint_dir+'/ckpt-{ckpt_num}'.format(ckpt_num=ckpt_num))
         
     def fit(self, dataset, epochs):     
         for epoch in range(epochs):
@@ -139,8 +142,11 @@ class Train_Face:
             os.mkdir(checkpoint_dir)
         self.face_checkpoint.save(file_prefix= self.face_checkpoint_prefix)
 
-    def load(self, checkpoint_dir):
-        self.face_checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
+    def load(self, checkpoint_dir, ckpt_num=None):
+        if ckpt_num is None:
+            self.face_checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
+        else:
+            self.face_checkpoint.restore(checkpoint_dir+'/ckpt-{ckpt_num}'.format(ckpt_num=ckpt_num))
 
     def fit(self, dataset, epochs):     
         for epoch in range(epochs):
@@ -156,7 +162,6 @@ class Train_Face:
                 # training_visualization once per 500 step
                 if step % 500 == 0:
                     training_visualization(self.face_model, process_img, real_input, epoch, step, 'face')     
-                break
             # Save (checkpoint) the model once per 2 epcoh
             if (epoch + 1) % 2 == 0:
                 self.save(self.face_checkpoint_dir)
