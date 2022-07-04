@@ -15,8 +15,9 @@ def main():
     parser.add_argument('--mode', default='multi_test', choices=['mask-train', 'face-train', 'single-test', 'multi-test'], dest='mode')
     parser.add_argument('--dir_test', default='./test', dest='dir_test')
     parser.add_argument('--ckpt_num', default=None, dest='ckpt_num')
-    parser.add_argument('--continue_training', dest='continue-training')
-    parser.set_defaults(continue_training=False)
+    parser.add_argument('--choice_ckpt', dest='choice_ckpt',  action='store_true')
+    parser.add_argument('--no-choice_ckpt', dest='choice_ckpt', action='store_false')
+    parser.set_defaults(choice_ckpt=False)
     
     PATH = os.getcwd()
     train_path = PATH+'/train'                
@@ -39,14 +40,14 @@ def main():
         with tf.device('/gpu:0'):
             if parser.parse_args().mode == 'mask-train':
                 mask_train = Train_Mask(mask_G, checkpoint_dir=mask_checkpoint_dir)
-                if parser.parse_args().continue_training :
+                if parser.parse_args().choice_ckpt :
                     mask_train.load(checkpoint_dir=mask_checkpoint_dir, ckpt_num=parser.parse_args().ckpt_num)
                 mask_train.fit(trainset, epochs=5)
                 
             elif parser.parse_args().mode == 'face-train':       
                 face_train = Train_Face(mask_G, face_G, face_D, 
                                 mask_checkpoint_dir=mask_checkpoint_dir, face_checkpoint_dir=face_checkpoint_dir)
-                if parser.parse_args().continue_training :
+                if parser.parse_args().choice_ckpt :
                     face_train.load(checkpoint_dir=face_checkpoint_dir, ckpt_num=parser.parse_args().ckpt_num)
                 face_train.fit(trainset, epochs=5)
 
