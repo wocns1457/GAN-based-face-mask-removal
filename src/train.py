@@ -165,4 +165,3 @@ class Train_Face:
             # Save (checkpoint) the model once per 2 epcoh
             if (epoch + 1) % 2 == 0:
                 self.save(self.face_checkpoint_dir)
-                
