@@ -48,15 +48,17 @@
 
 - Mask G Training
  ```
- python src/main.py --mode mask-train
+ python src/main.py --mode mask-train  # If a checkpoint exists, training proceeds from the latest checkpoint.
+ python src/main.py --mode mask-train --choice_ckpt --ckpt_num 'num'  # If you want to train at a specific checkpoint.
  ```
 - Face G Training,  Face D Training
  ```
- python src/main.py --mode face-train
+ python src/main.py --mode face-train  # If a checkpoint exists, training proceeds from the latest checkpoint.
+ python src/main.py --mode face-train --choice_ckpt --ckpt_num 'num'  # If you want to train at a specific checkpoint.
  ```
 - Test
  ```
- python src/main.py --mode multi_test --dir_test ./test
+ python src/main.py --mode multi-test --dir_test ./test  # Make predictions from the latest checkpoints.
  ```
  
 ## Result
