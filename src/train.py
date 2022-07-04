@@ -164,4 +164,4 @@ class Train_Face:
                     training_visualization(self.face_model, process_img, real_input, epoch, step, 'face')     
             # Save (checkpoint) the model once per 2 epcoh
             if (epoch + 1) % 2 == 0:
-                self.save(self.face_checkpoint_dir)
+                self.save(self.face_checkpoint_dir)  
