@@ -1,7 +1,6 @@
 ## GAN-based-face-mask-removal
 이 프로젝트는 마스크를 쓴 인물의 이미지에서 마스크 뒤에 감춰진 얼굴을 복원하는 프로젝트입니다. U-Net구조를 기반으로 하여 마스크 객체의 값을 1로 나머지 부분을 0으로 [Segmentation](https://arxiv.org/abs/1505.04597)하여 마스크를 쓴 인물의 사진에서 마스크에 해당하는 부분에 Random Noise를 합성한 뒤, [GAN](https://arxiv.org/abs/1406.2661)구조를 사용해 Random Noise부분을 실제 얼굴로 복원합니다.  
 
-[발표 영상 링크](https://drive.google.com/file/d/1352vJfHDr91SVfbJiLqFtGJZTmQWdxB1/view?usp=sharing)
 ## Environment
 - python==3.8
 - tensorflow-gpu==2.4.0
